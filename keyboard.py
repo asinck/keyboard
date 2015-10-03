@@ -20,6 +20,9 @@ kbd = [] #this will be a two-dimensional array of keys
 #I will also need a shift key, maybe detect if shift is used on hw. kbd?
 letters = {} #this will hold a hash table of letters
 
+
+#This toggles whether shift is currently being "held down" according
+#to the program. I don't currently know a better way to do this. 
 def toggleShift(var=None):
     global shiftDown
     if shiftDown:
@@ -29,21 +32,21 @@ def toggleShift(var=None):
         shiftDown = True
         shift.config(bg = "#AAA", text = u'\u2193 Shift \u2193')
     change(alphabet)
-    
+
+#This inserts a letter at the cursor and prints whatever's in the text
+#entry box to the console
 def typeLetter(letter):
-    myLetter = 'a'
-    if shiftDown:
-        myLetter = letter[0]
-    else:
-        myLetter = letter[1]
-    print output.get('0.0', END).strip('\n') + myLetter
+    print output.get('0.0', END).strip('\n') + letter
     sys.stdout.flush()
-    output.insert(INSERT, myLetter)
+    output.insert(INSERT, letter)
     output.focus_set()
 
+#I use ctrl-u a lot, so I programmed it into this program. This
+#function is called by hitting ctrl-u.
 def clearToPoint(point=END, begin='0.0'):
     output.delete(begin, point)
 
+#This changes the displayed keyboard.
 def change(newAlphabet):
     global alphabet
     alphabet = newAlphabet
@@ -60,6 +63,8 @@ def change(newAlphabet):
     letters = {}
     caps = True #whether or not the set of characters has a capitalization
     kbd = []
+
+    #decide which letter table to use
     if newAlphabet == "greek":
         letterOrder = greek
         letters = greekLetters
@@ -88,25 +93,27 @@ def change(newAlphabet):
     elif alphabet == "symbols":
         width = 11
         height = len(letters) / 11 + 1
-
     rows = 0
     count = 0
     buttons = []
-
+    
+    #set up the frames
     for i in range(height):
         kbd.append(Frame(keyboardFrame))
         kbd[i].pack(side=TOP)
+
+    #make the keyboard
     for letter in letterOrder:
         if count == width:
             count = 0
             rows += 1
         #capital letters are the first entry in the pair
-        myText = letters[letter][0]
+        myLetter = letters[letter][0]
         #this should only put lowercase letters if there are any
         if caps and not shiftDown:
-            myText = letters[letter][1]
-        myCommand =  lambda letter = letter: typeLetter(letters[letter])
-        b = Button(kbd[rows], text = myText, command = myCommand)
+            myLetter = letters[letter][1]
+        myCommand =  lambda myLetter = myLetter: typeLetter(myLetter)
+        b = Button(kbd[rows], text = myLetter, command = myCommand)
         b.pack(side=LEFT)
         count += 1
 
