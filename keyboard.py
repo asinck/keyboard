@@ -2,17 +2,34 @@
 #standard keyboard.
 
 
+#this is a list of import commands. If the user doesn't have Tkinter
+#or other libraries installed, it will fail gracefully instead of
+#crashing.
+imports = [
+    "from Tkinter import *",
+    "import Tkinter as tk",
+    "import time",
+    "from letters import *",
+    "import sys"
+]
+#failedPackages will keep a record of the names of the packages that
+#failed to import, so that the program can go through the entire list
+#of packages that it wants to import. This will allow the program to
+#give the user a complete list of packages that they need to install,
+#instead of only telling the user one at a time.
+failedPackages = ''
+for i in imports:
+    try:
+        exec(i)
+    except ImportError as error:
+        failedPackages += str(error) + '\n'
+#if there were any errors in the imports, tell the users what packages
+#didn't import, and exit.
+if len(failedPackages) > 0:
+    print "Some packages could not be imported:"
+    print failedPackages
+    exit()
 
-from Tkinter import *
-import Tkinter as tk
-import time
-from letters import *
-import sys
-
-#I don't think I'll be needing this unless I can program this not to count
-#itself as a window or send keystrokes to the second window on the alt-tab stack
-
-#import subprocess
 
 shiftDown = True
 alphabet = "greek"
@@ -126,8 +143,11 @@ def change(newAlphabet):
 
 root = Tk()
 root.title("UTF-8 Keyboard")
-icon = PhotoImage(file="icon.png")
-root.tk.call('wm', 'iconphoto', root._w, icon)
+try:
+    icon = PhotoImage(file="icon.png")
+    root.tk.call('wm', 'iconphoto', root._w, icon)
+except:
+    print "Error: could not set icon for this program."
 
 leftFrame = Frame(root)
 keyboardFrame = Frame(leftFrame)
