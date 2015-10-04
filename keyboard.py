@@ -87,7 +87,7 @@ def change(newAlphabet):
     #some specific formatting for certain character sets
     height = 3
     width = (len(letters) / height) + 1
-    if alphabet == "english" or newAlphabet == "circles":
+    if alphabet == "english" or newAlphabet == "circles" or newAlphabet == "greek":
         width = 10
         height = len(letters) / 10 + 1
     elif alphabet == "symbols":
@@ -101,7 +101,10 @@ def change(newAlphabet):
     for i in range(height):
         kbd.append(Frame(keyboardFrame))
         kbd[i].pack(side=TOP)
-
+    #add one more for a space bar
+    kbd.append(Frame(keyboardFrame))
+    kbd[height].pack(side=TOP)
+    
     #make the keyboard
     for letter in letterOrder:
         if count == width:
@@ -116,7 +119,8 @@ def change(newAlphabet):
         b = Button(kbd[rows], text = myLetter, command = myCommand)
         b.pack(side=LEFT)
         count += 1
-
+    b = Button(kbd[height], text = '[_____________]', command = lambda : typeLetter(' '))
+    b.pack()
 
 
 

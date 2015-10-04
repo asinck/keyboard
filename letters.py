@@ -2,31 +2,34 @@
 #This file contains the letter sets for the program.
 
 greek = [
-    'alpha',
-    'beta',
-    'gamma',
-    'delta',
-    'epsilon',
-    'zeta',
-    'eta',
     'theta',
+    'omega',
+    'epsilon',
+    'rho',
+    'tau',
+    'psi',
+    'upsilon',
     'iota',
-    'kappa',
-    'lamda',
-    'mu',
-    'nu',
-    'xi',
     'omicron',
     'pi',
-    'rho',
-    'final sigma',
+
+    'alpha',
     'sigma',
-    'tau',
-    'upsilon',
+    'delta',
     'phi',
+    'gamma',
+    'eta',
+    'xi',
+    'kappa',
+    'lamda',
+    'question',
+
+    'zeta',
     'chi',
-    'psi',
-    'omega'
+    'nu',
+    'beta',
+    'mu',
+    'final sigma'
 ]
 
 greekLetters = {
@@ -54,14 +57,15 @@ greekLetters = {
     'phi':[u'\u03A6',u'\u03C6'],
     'chi':[u'\u03A7',u'\u03C7'],
     'psi':[u'\u03A8',u'\u03C8'],
-    'omega':[u'\u03A9',u'\u03C9']
+    'omega':[u'\u03A9',u'\u03C9'],
+    'question':[u'\u037E',u'\u037E']
 }
 
 english = [
     '1','2','3','4','5','6','7','8','9','0',
     'q','w','e','r','t','y','u','i','o','p',
     'a','s','d','f','g','h','j','k','l',';',
-    'z','x','c','v','b','n','m',' '
+    'z','x','c','v','b','n','m'
 ]
 
 englishLetters = {
@@ -101,8 +105,7 @@ englishLetters = {
     'x':['X','x'],
     'y':['Y','y'],
     'z':['Z','z'],
-    ';':[':',':'],
-    ' ':[' ',' ']
+    ';':[':',':']
 }
 
 symbols = [
