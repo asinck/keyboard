@@ -34,7 +34,7 @@ if len(failedPackages) > 0:
 shiftDown = True
 alphabet = "greek"
 kbd = [] #this will be a two-dimensional array of keys
-#I will also need a shift key, maybe detect if shift is used on hw. kbd?
+
 letters = {} #this will hold a hash table of letters
 
 
@@ -140,20 +140,28 @@ def change(newAlphabet):
     b.pack()
 
 
+#lots of gui setup
 
 root = Tk()
 root.title("UTF-8 Keyboard")
+
+#set the icon for the program, if possible
 try:
     icon = PhotoImage(file="icon.png")
     root.tk.call('wm', 'iconphoto', root._w, icon)
 except:
     print "Error: could not set icon for this program."
 
+#the main frames that the program will use
 leftFrame = Frame(root)
 keyboardFrame = Frame(leftFrame)
 selectionFrame = Frame(root)
 textFrame = Frame(leftFrame)
 output = Text(textFrame, height = 3, width = 70)
+
+#a bunch of buttons. The first one toggles capitalization of letters
+#in the program, as relevant; the others besides the last one switch
+#keyboards; the last one clears the text entry box
 
 shift = Button(selectionFrame, text = u'\u2193 Shift \u2193', command = lambda: toggleShift())
 
@@ -163,6 +171,7 @@ symbolButton=Button(selectionFrame,text="Symbols",command=lambda:change("symbols
 circlesButton=Button(selectionFrame,text="Circles",command=lambda:change("circles"))
 clear = Button(selectionFrame, text = "Clear", command = lambda: clearToPoint())
 
+#pack up like there's no tomorrow
 leftFrame.pack(side=LEFT)
 keyboardFrame.pack(side=TOP, fill=BOTH)
 keyboardFrame.config(bg = "#3C3B37")
@@ -179,17 +188,14 @@ circlesButton.pack(side=TOP)
 englishButton.pack(side=TOP)
 clear.pack(side=TOP)
 
-
+#initialize an initial keyboard (pun fully intended)
 change("greek")
 
+#Escape toggles shift
 root.bind("<Escape>", toggleShift)
-#root.bind("<Control-u>", lambda x: clearToPoint(INSERT, "linestart"))
+#it's important to me that ctrl-u clears from the cursor to the
+#beginning of the line.
 root.bind("<Control-u>", lambda x: clearToPoint(INSERT, output.index(INSERT)[0]+'.0'))
 
-
+#ready, set, run
 root.mainloop()
-
-
-
-
-#I'll also need a text entry area for the char's
