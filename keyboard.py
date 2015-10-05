@@ -136,8 +136,11 @@ def change(newAlphabet):
         b = Button(kbd[rows], text = myLetter, command = myCommand)
         b.pack(side=LEFT)
         count += 1
-    b = Button(kbd[height], text = '[_____________]', command = lambda : typeLetter(' '))
-    b.pack()
+    spacebar = Button(kbd[height], text = '[_____________]', command = lambda : typeLetter(' '))
+    spacebar.pack(side=LEFT)
+    backspace = Button(kbd[height], text = 'backspace', command = lambda : output.delete("%s-1c" %INSERT, INSERT))
+    backspace.pack(side=RIGHT)
+    
 
 
 #lots of gui setup
