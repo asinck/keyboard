@@ -150,7 +150,7 @@ root.title("UTF-8 Keyboard")
 
 #set the icon for the program, if possible
 try:
-    icon = PhotoImage(file="icon.png")
+    icon = PhotoImage(file="./icon.png")
     root.tk.call('wm', 'iconphoto', root._w, icon)
 except:
     print "Warning: could not set icon for this program."
