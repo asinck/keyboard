@@ -153,7 +153,7 @@ try:
     icon = PhotoImage(file="icon.png")
     root.tk.call('wm', 'iconphoto', root._w, icon)
 except:
-    print "Error: could not set icon for this program."
+    print "Warning: could not set icon for this program."
 
 #the main frames that the program will use
 leftFrame = Frame(root)
