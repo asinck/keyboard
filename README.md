@@ -10,3 +10,4 @@ The characters I programmed into the program are those that I need, or those tha
 To run this program, run keyboard.py; it uses the other files. This program requires the Tkinter library to run. Hit escape or press the shift button to toggle in-program shift (well, caps lock).
 
 
+A note about the programming: I wrote this program to work, not to be well written. Version 2 will probably be a lot cleaner (if I ever get to it).
